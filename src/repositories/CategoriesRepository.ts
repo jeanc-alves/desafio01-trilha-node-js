@@ -2,7 +2,7 @@ import { Category } from "../model/Category";
 
 interface ICreateCategoryDTO {
     name: string;
-    descripition: string
+    description: string
 }
 
 class CategoriesRepository {
@@ -12,12 +12,12 @@ class CategoriesRepository {
         this.categories = []
     }
 
-    create({ descripition, name }: ICreateCategoryDTO): void {
+    create({ description, name }: ICreateCategoryDTO): void {
         const category = new Category()
 
         Object.assign(category, {
             name,
-            descripition,
+            description,
             created_at: new Date()
         })
 
@@ -29,6 +29,7 @@ class CategoriesRepository {
 
     findCategorybyName(name: string) {
         return this.categories.find((category) => category.name === name)
+
     }
 }
 
