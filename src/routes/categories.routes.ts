@@ -3,7 +3,7 @@ import multer from 'multer'
 
 import { createCategoryController } from '../modules/cars/useCases/createCategory'
 import { listCategoriesController } from '../modules/cars/useCases/listCategories'
-import { importCategoryController } from '../modules/cars/useCases/importCategory'
+import { importCategoryController } from '../modules/cars/useCases/importCategories'
 
 const upload = multer({
     dest: "./tmp",
