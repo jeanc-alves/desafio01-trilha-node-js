@@ -9,4 +9,6 @@ router.use('/categories', categoriesRoutes)
 
 router.use('/specifications', specificationRoutes)
 
+
+
 export { router }
