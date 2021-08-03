@@ -20,16 +20,18 @@ class ImportCategoryUseCase {
 
             stream.pipe(parseFile)
 
-            parseFile.on("data", async (line) => {
-                console.log(line)
-                const [name, description] = line
-                categories.push({
-                    name,
-                    description
+            parseFile
+                .on("data", async (line) => {
+                    console.log(line)
+                    const [name, description] = line
+                    categories.push({
+                        name,
+                        description
+                    })
+                }).on("end", () => {
+                    fs.promises.unlink(file.path)
+                    resolve(categories)
                 })
-            }).on("end", () => {
-                resolve(categories)
-            })
                 .on("error", (err) => {
                     reject(err)
                 })
