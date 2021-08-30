@@ -8,7 +8,9 @@ export default (): CreateCategoryController => {
     const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository)
     const createCategoryController = new CreateCategoryController(
         createCategoryUseCase
-        );
+        )
+   
     return createCategoryController
+     
 }
 
