@@ -1,5 +1,6 @@
-import { ICategoriesRepository } from "../../repositories/ICategoriesRepository"
-import {inject,injectable} from 'tsyringe'
+import { AppError } from "@errors/AppError"
+import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository'
+import { inject, injectable } from 'tsyringe'
 
 
 interface IRequest {
@@ -10,15 +11,15 @@ interface IRequest {
 class CreateCategoryUseCase {
     constructor(
         @inject("CategoriesRepository")
-        private categoriesRepository: ICategoriesRepository) {}
+        private categoriesRepository: ICategoriesRepository) { }
 
-    async execute ({ name, description }: IRequest): Promise<void> {
+    async execute({ name, description }: IRequest): Promise<void> {
         const categoryAlreadyExist = await this.categoriesRepository.findByName(name)
 
         if (categoryAlreadyExist) {
             throw new AppError("Category Already Exists")
         }
-         await this.categoriesRepository.create({ name, description })
+        await this.categoriesRepository.create({ name, description })
     }
 }
 export { CreateCategoryUseCase }

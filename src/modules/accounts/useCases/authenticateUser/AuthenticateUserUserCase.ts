@@ -1,9 +1,10 @@
+import 'reflect-metadata'
+import { inject, injectable } from "tsyringe";
 import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
-import { inject, injectable } from "tsyringe";
-import { AppError } from '../../../../errors/AppError';
+import { AppError } from '@errors/AppError';
 
-import { IUSerRepository } from "../../repositories/IUserRepository";
+import { IUSerRepository } from "@modules/accounts/repositories/IUserRepository";
 
 
 
