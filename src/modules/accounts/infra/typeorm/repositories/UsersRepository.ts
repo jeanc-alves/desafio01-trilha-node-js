@@ -1,8 +1,8 @@
 import { getRepository, Repository } from "typeorm";
 
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { User } from "../../entities/User";
-import { IUSerRepository } from "../IUserRepository";
+import { ICreateUserDTO } from "../../../dtos/ICreateUserDTO";
+import { IUSerRepository } from "../../../repositories/IUserRepository";
+import { User } from "../entities/User";
 
 class UsersRepository implements IUSerRepository {
 
@@ -10,7 +10,7 @@ class UsersRepository implements IUSerRepository {
 
     constructor() {
         this.repository = getRepository(User)
-    }
+    } 
 
     async create({
         name,

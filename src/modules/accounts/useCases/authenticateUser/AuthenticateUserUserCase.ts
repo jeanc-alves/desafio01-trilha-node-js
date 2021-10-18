@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { inject, injectable } from "tsyringe";
 import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
-import { AppError } from '@errors/AppError';
+import { AppError } from '@shared/errors/AppError';
 
 import { IUSerRepository } from "@modules/accounts/repositories/IUserRepository";
 
