@@ -27,17 +27,17 @@ async function ensureAuthenticated(request: Request, response: Response, next: N
 
         const usersRepository = new UsersRepository()
 
-        const user = usersRepository.findById(user_id)
+        const user = await usersRepository.findById(user_id)
 
         if (!user) {
             throw new AppError("User does not exist!")
         }
 
-        next()
 
         request.user = {
             id: user_id
         }
+        return next()
     } catch (error) {
         throw new AppError("Invalid token")
     }

@@ -15,7 +15,6 @@ describe("Create Car", () => {
       name: "Name Car",
       description: "Description Car",
       daily_rate: 100,
-      available: true,
       lisence_plate: "ABC-1234",
       fine_amount: 100,
       brand: "Brand Car",
@@ -31,7 +30,7 @@ describe("Create Car", () => {
         name: "Name Car1",
         description: "Description Car",
         daily_rate: 100,
-        available: true,
+
         lisence_plate: "ABC-1234",
         fine_amount: 100,
         brand: "Brand Car",
@@ -42,7 +41,7 @@ describe("Create Car", () => {
         name: "Name Car2",
         description: "Description Car",
         daily_rate: 100,
-        available: true,
+
         lisence_plate: "ABC-1234",
         fine_amount: 100,
         brand: "Brand Car",
@@ -56,7 +55,6 @@ describe("Create Car", () => {
       name: "Car Available",
       description: "Description Car",
       daily_rate: 100,
-      available: true,
       lisence_plate: "ABC-1234",
       fine_amount: 100,
       brand: "Brand Car",
