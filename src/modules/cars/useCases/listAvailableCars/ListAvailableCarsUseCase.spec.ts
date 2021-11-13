@@ -72,7 +72,6 @@ describe("List Cars", () => {
     const cars = await listAvailableCarsUseCase.execute({
       category_id: "dd92ea3e",
     });
-    console.log("cars :", cars);
 
     expect(cars).toEqual([car]);
   });
