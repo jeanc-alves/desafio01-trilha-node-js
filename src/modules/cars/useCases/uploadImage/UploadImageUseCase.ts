@@ -1,0 +1,3 @@
+class UploadImageUseCase {}
+
+export { UploadImageUseCase };
