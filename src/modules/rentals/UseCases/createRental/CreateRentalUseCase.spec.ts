@@ -17,6 +17,7 @@ describe("Create Rental", () => {
       dayjsDateProvider
     );
   });
+
   it("shoud be able to create a new rental", async () => {
     const newRental = await createRentalUseCase.execute({
       user_id: "12345",
