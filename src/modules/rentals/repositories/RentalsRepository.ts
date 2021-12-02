@@ -29,5 +29,8 @@ class RentalsRepository implements IRentalsRepository {
     await this.repository.save(rental);
     return rental;
   }
+  async findById(id: string): Promise<Rental> {
+    return this.repository.findOne(id);
+  }
 }
 export { RentalsRepository };

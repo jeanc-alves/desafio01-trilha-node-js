@@ -74,6 +74,10 @@ Não deve ser possivel cadastrar um aluguel caso já exista um aberto para o mes
 
 Não deve ser possivel cadastrar um aluguel caso já exista um aberto para o mesmo carro.
 
+O Usuario deve estar logado
+
+Ao Realizar um aluguel, o status do carro deve ser alterado para indisponivel
+
 **Devolução de carro**
 
 **RF**
