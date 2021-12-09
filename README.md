@@ -91,3 +91,13 @@ Ao realizar a devolução, o usuario deve ser libarado para fazer outro aluguel
 Ao realizar a devolução, devera ser calculado o total do aluguel.
 Caso o horario de devolução seja superior ao horario previsto de entrega, deve ser cobrado multa proporcional aos dias de atraso
 Caso haja multa, deve ser somado o valor da multa ao total do aluguel
+
+# Listagem de alugueis para usuario
+
+**RF**
+
+Deves ser possivel realizar a busca de todos os alugueis do usuario
+
+**RN**
+
+O usuário deve estar logado na aplicação
