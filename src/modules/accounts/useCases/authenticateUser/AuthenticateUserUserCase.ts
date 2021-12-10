@@ -1,62 +1,61 @@
-import 'reflect-metadata'
+import "reflect-metadata";
 import { inject, injectable } from "tsyringe";
-import { compare } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
-import { AppError } from '@shared/errors/AppError';
+import { compare } from "bcrypt";
+import { sign } from "jsonwebtoken";
+import { AppError } from "@shared/errors/AppError";
 
 import { IUSerRepository } from "@modules/accounts/repositories/IUserRepository";
 
-
-
-
 interface IRequest {
-    email: string
-    password: string
+  email: string;
+  password: string;
 }
 
 interface IResponse {
-    user: {
-        name: string
-        email: string,
-        id: string
-    },
-    token: string
+  user: {
+    name: string;
+    email: string;
+    id: string;
+  };
+  token: string;
 }
 
 @injectable()
 class AuthenticateUserUseCase {
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: IUSerRepository
+  ) {}
 
-    constructor(
-        @inject("UsersRepository")
-        private usersRepository: IUSerRepository
-    ) { }
+  async execute({ email, password }: IRequest): Promise<IResponse> {
+    const user = await this.usersRepository.findByEmail(email);
 
-    async execute({ email, password }: IRequest): Promise<IResponse> {
-        const user = await this.usersRepository.findByEmail(email)
-
-        if (!user) {
-            throw new AppError('Email or password incorrect')
-        }
-
-        const passwordMatch = await compare(password, user.password)
-
-        if (!passwordMatch) {
-            throw new AppError('Email or password incorrect')
-        }
-
-        const token = sign({}, "c053edb3641fee928b29a5e5edc25e1c", { subject: user.id, expiresIn: "1d" })
-
-        const tokenReturn: IResponse = {
-            user: {
-                name: user.name,
-                email: user.email,
-                id: user.id
-            },
-            token,
-        }
-        return tokenReturn
+    if (!user) {
+      throw new AppError("Email or password incorrect");
     }
 
+    const passwordMatch = await compare(password, user.password);
+
+    if (!passwordMatch) {
+      throw new AppError("Email or password incorrect");
+    }
+
+    const token = sign({}, "c053edb3641fee928b29a5e5edc25e1c", {
+      subject: user.id,
+      expiresIn: "1d",
+    });
+
+    const tokenReturn: IResponse = {
+      user: {
+        name: user.name,
+        email: user.email,
+        id: user.id,
+      },
+      token,
+    };
+    console.log("tokenReturn :", tokenReturn);
+    return tokenReturn;
+  }
 }
 
-export { AuthenticateUserUseCase }
+export { AuthenticateUserUseCase };
