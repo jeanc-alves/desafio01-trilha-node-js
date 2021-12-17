@@ -53,7 +53,6 @@ class AuthenticateUserUseCase {
       },
       token,
     };
-    console.log("tokenReturn :", tokenReturn);
     return tokenReturn;
   }
 }
