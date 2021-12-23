@@ -1,49 +1,48 @@
 import { NextFunction, Request, Response } from "express";
-import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository";
 import { AppError } from "@shared/errors/AppError";
 
 import { verify } from "jsonwebtoken";
-
-
-
-
+import { UsersTokensRepository } from "@modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
+import auth from "../../../../config/auth";
 interface IPayload {
-    sub: string
+  sub: string;
 }
 
+async function ensureAuthenticated(
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
+  const authHeader = request.headers.authorization;
 
-async function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
+  const usersTokensRepository = new UsersTokensRepository();
+  const { secret_refresh_token } = auth;
 
-    const authHeader = request.headers.authorization
+  if (!authHeader) {
+    throw new AppError("Token missing");
+  }
 
-    if (!authHeader) {
-        throw new AppError("Token missing")
+  const [, token] = authHeader.split(" ");
+
+  try {
+    const { sub: user_id } = verify(token, secret_refresh_token) as IPayload;
+
+    const user = await usersTokensRepository.findByUserIdAndRefreshToken(
+      user_id,
+      token
+    );
+
+    if (!user) {
+      throw new AppError("User does not exist!");
     }
 
-    const [, token] = authHeader.split(" ")
-
-    try {
-        const { sub: user_id } = verify(token, "c053edb3641fee928b29a5e5edc25e1c") as IPayload
-
-        const usersRepository = new UsersRepository()
-
-        const user = await usersRepository.findById(user_id)
-
-        if (!user) {
-            throw new AppError("User does not exist!")
-        }
-
-
-        request.user = {
-            id: user_id
-        }
-        return next()
-    } catch (error) {
-        throw new AppError("Invalid token")
-    }
-
-
-
+    request.user = {
+      id: user_id,
+    };
+    return next();
+  } catch (error) {
+    throw new AppError("Invalid token");
+  }
 }
 
-export { ensureAuthenticated }
+export { ensureAuthenticated };
