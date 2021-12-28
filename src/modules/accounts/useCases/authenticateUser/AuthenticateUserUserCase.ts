@@ -4,10 +4,10 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { AppError } from "@shared/errors/AppError";
 
-import { IUSerRepository } from "@modules/accounts/repositories/IUserRepository";
 import { IUsersTokensRepository } from "../../repositories/IUsersTokensRepository";
 import auth from "../../../../config/auth";
 import { IDateProvider } from "../../../../shared/container/providers/DateProvider/IDateProvider";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
   email: string;
@@ -29,7 +29,7 @@ interface IResponse {
 class AuthenticateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: IUSerRepository,
+    private usersRepository: IUsersRepository,
     @inject("UsersTokensRepository")
     private usersTokensRepository: IUsersTokensRepository,
     @inject("DayjsDateProvider")
