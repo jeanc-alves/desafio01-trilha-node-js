@@ -31,12 +31,12 @@ describe("List Categories Controller", () => {
       password: "admin",
     });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     await request(app)
       .post("/categories")
       .send({ name: "Category", description: "Desc" })
-      .set({ Authorization: `bearer ${token}` });
+      .set({ Authorization: `bearer ${refresh_token}` });
 
     const response = await request(app).get("/categories");
 

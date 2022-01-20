@@ -31,12 +31,12 @@ describe("Create Category Controller", () => {
       password: "admin",
     });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     const response = await request(app)
       .post("/categories")
       .send({ name: "Category", description: "Desc" })
-      .set({ Authorization: `bearer ${token}` });
+      .set({ Authorization: `bearer ${refresh_token}` });
     expect(response.status).toBe(201);
   });
   it("Should not be able to create a new Category with name exist", async () => {
@@ -45,12 +45,12 @@ describe("Create Category Controller", () => {
       password: "admin",
     });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     const response = await request(app)
       .post("/categories")
       .send({ name: "Category", description: "Desc" })
-      .set({ Authorization: `bearer ${token}` });
+      .set({ Authorization: `bearer ${refresh_token}` });
     expect(response.status).toBe(400);
   });
 });
