@@ -26,7 +26,7 @@ describe("Send forgot Mail", () => {
   });
 
   it("shoud be able to send a forgot password mail to user", async () => {
-    const SendMail = spyOn(mailProvider, "sendMail");
+    const SendMail = jest.spyOn(mailProvider, "sendMail");
 
     await userRepositoryInMemory.create({
       name: "Jean Alves",
@@ -44,6 +44,7 @@ describe("Send forgot Mail", () => {
     ).rejects.toEqual(new AppError("User Does not exists!"));
   });
   it("should be able to create an user token", async () => {
+    const token_generate = jest.spyOn(usersTokensRepositoryInMemory, "create");
     await userRepositoryInMemory.create({
       name: "Juca Chaves",
       password: "senha123",
@@ -53,6 +54,6 @@ describe("Send forgot Mail", () => {
 
     await sendForgotPasswordMailUseCase.execute("juca@chaves.com");
 
-    expect(spyOn(usersTokensRepositoryInMemory, "create")).toHaveBeenCalled();
+    expect(token_generate).toHaveBeenCalled();
   });
 });
