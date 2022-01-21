@@ -16,9 +16,13 @@ let dateProvider: DayjsDateProvider;
 describe("Authenticate User", () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory();
+
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory);
+
     usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
+
     dateProvider = new DayjsDateProvider();
+
     authenticateUserUseCase = new AuthenticateUserUseCase(
       userRepositoryInMemory,
       usersTokensRepositoryInMemory,
